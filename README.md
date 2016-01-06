@@ -18,11 +18,12 @@ of the host the docker containers are running on to access prometheus (`localhos
 
 ## Exposed ports
 
-| Port | Component          |
-|-----:|:-------------------|
-| 3000 | PromDash           |
-| 9090 | Prometheus         |
-| 9091 | Pushgateway        |
-| 9093 | Alertmanager       |
-| 9100 | Node exporter      |
-| 9104 | Container exporter |
+| Port | Component                                                                | Description                             |
+|-----:|:-------------------------------------------------------------------------|:----------------------------------------|
+| 3000 | [PromDash](https://github.com/prometheus/promdash)                       | Graphing dashboard                      |
+| 8080 | [goecho](https://hub.docker.com/r/xperimental/goecho/)                   | Example service                         |
+| 9090 | [Prometheus](https://github.com/prometheus/prometheus)                   | Metrics database                        |
+| 9091 | [Pushgateway](https://github.com/prometheus/pushgateway)                 | Gateway for batch jobs                  |
+| 9093 | [Alertmanager](https://github.com/prometheus/alertmanager)               | Aggregation and notification for alerts |
+| 9100 | [Node exporter](https://github.com/prometheus/node_exporter)             | Hardware metrics                        |
+| 9104 | [Container exporter](https://github.com/docker-infra/container_exporter) | Docker container metrics                |

@@ -31,3 +31,8 @@ scrape_configs:
   target_groups:
     - targets:
       - "node-exporter:9100"
+
+- job_name: goecho
+  target_groups:
+    - targets:
+      - "service:8080"

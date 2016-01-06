@@ -22,6 +22,7 @@ prometheus:
         - alertmanager
         - container-exporter
         - node-exporter
+        - goecho:service
     volumes:
         - ./prometheus.yml:/prometheus.yml
         - ./alert.rules:/alert.rules
@@ -45,3 +46,7 @@ node-exporter:
     image: prom/node-exporter
     ports:
         - "9100:9100"
+goecho:
+    image: xperimental/goecho:1.3
+    ports:
+        - "8080:8080"

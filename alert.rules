@@ -1,0 +1,9 @@
+ALERT TooManyErrors
+  IF sum(rate(http_requests_total{code=~"^5..$"}[5m])) by (job) > 0.1
+  FOR 5m
+  WITH {
+    team="backend"
+  }
+  SUMMARY "Too many errors"
+  DESCRIPTION "Service ${labels.job} has too many errors."
+  

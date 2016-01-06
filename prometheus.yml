@@ -1,0 +1,33 @@
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+
+rule_files:
+    - "/alert.rules"
+
+scrape_configs:
+- job_name: prometheus
+  target_groups:
+  - targets:
+    - 'localhost:9090'
+
+- job_name: alertmanager
+  target_groups:
+  - targets:
+    - 'alertmanager:9093'
+
+- job_name: pushgateway
+  target_groups:
+  - targets:
+    - 'pushgateway:9091'
+
+- job_name: container-exporter
+  target_groups:
+  - targets:
+    - "container-exporter:9104"
+
+- job_name: node-exporter
+  target_groups:
+    - targets:
+      - "node-exporter:9100"

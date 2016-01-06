@@ -1,0 +1,47 @@
+promdash:
+    image: prom/promdash
+    ports:
+        - "3000:3000"
+    links:
+        - prometheus
+    volumes:
+        - ./promdash/:/tmp/promdash/
+    environment:
+        - TZ=Europe/Zurich
+        - DATABASE_URL=sqlite3:/tmp/promdash/promdash.sqlite3
+        - RAILS_ENV=production
+prometheus:
+    image: prom/prometheus
+    command: -config.file=/prometheus.yml -alertmanager.url=http://alertmanager:9093/
+    ports:
+        - "9090:9090"
+    environment:
+        - TZ=Europe/Zurich
+    links:
+        - pushgateway
+        - alertmanager
+        - container-exporter
+        - node-exporter
+    volumes:
+        - ./prometheus.yml:/prometheus.yml
+        - ./alert.rules:/alert.rules
+pushgateway:
+    image: prom/pushgateway
+    ports:
+        - "9091:9091"
+alertmanager:
+    image: prom/alertmanager
+    ports:
+        - "9093:9093"
+    volumes:
+        - ./alertmanager.conf:/alertmanager/alertmanager.conf
+container-exporter:
+    image: prom/container-exporter
+    ports:
+        - "9104:9104"
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+node-exporter:
+    image: prom/node-exporter
+    ports:
+        - "9100:9100"
